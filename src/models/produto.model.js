@@ -1,31 +1,34 @@
 module.exports = (sequelize, Sequelize) => {
-    const Produto = sequelize.define("produtos", {
-        idProdutos: {
+  const Produto = sequelize.define(
+    'produtos',
+    {
+      idProdutos: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       descricao: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       unidade: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       precoCompra: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       precoVenda: {
-        type: Sequelize.STRING
-      }
+        type: Sequelize.STRING,
+      },
     },
     {
       timestamps: false,
       createdAt: false,
-      updatedAt: false
-    });
-  
-    return Produto;
-  };
+      updatedAt: false,
+    }
+  )
+
+  return Produto
+}

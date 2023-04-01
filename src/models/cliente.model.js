@@ -1,45 +1,48 @@
 module.exports = (sequelize, Sequelize) => {
-    const Cliente = sequelize.define("clientes", {
-        idClientes: {
+  const Cliente = sequelize.define(
+    'clientes',
+    {
+      idClientes: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       nomeCliente: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       telefone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       celular: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       dataCadastro: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       tipoCobranca: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       dataCobranca: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       userIptv: {
-        type: Sequelize.STRING
-      }
+        type: Sequelize.STRING,
+      },
     },
     {
       timestamps: false,
       createdAt: false,
-      updatedAt: false
-    });
-  
-    return Cliente;
-  };
+      updatedAt: false,
+    }
+  )
+
+  return Cliente
+}
