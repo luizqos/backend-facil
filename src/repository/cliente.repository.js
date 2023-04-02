@@ -2,6 +2,7 @@ const db = require('../models')
 const clientes = db.clientes
 const vendas = db.vendas
 const lancamentos = db.lancamentos
+const produtosCliente = db.produtosClientes
 const Op = db.Sequelize.Op
 
 class ClientesRepository {
@@ -36,6 +37,13 @@ class ClientesRepository {
                                 },
                             },
                         ],
+                    },
+                    {
+                        model: produtosCliente,
+                        required: true,
+                        attributes: {
+                            exclude: ['idProdutosClientes', 'clientes_id'],
+                        },
                     },
                 ],
             })
