@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -7,7 +8,6 @@ const app = express()
 let corsOptions = {
   origin: 'http://localhost:8081',
 }
-
 app.use(cors(corsOptions))
 
 // parse requests of content-type - application/json
@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
 
 require('./src/routes/cliente.routes')(app)
 require('./src/routes/produto.routes')(app)
+require('./src/routes/venda.routes')(app)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000
