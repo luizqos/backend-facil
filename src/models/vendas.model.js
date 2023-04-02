@@ -1,40 +1,39 @@
 module.exports = (sequelize, Sequelize) => {
-    const Cliente = sequelize.define(
-        'clientes',
+    const Vendas = sequelize.define(
+        'vendas',
         {
-            idClientes: {
+            idVendas: {
                 type: Sequelize.INTEGER,
                 autoIncrement: true,
                 allowNull: false,
                 primaryKey: true,
             },
-            nomeCliente: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            email: {
+            dataVenda: {
                 type: Sequelize.STRING,
             },
-            telefone: {
-                type: Sequelize.STRING,
+            valorTotal: {
+                type: Sequelize.DECIMAL,
             },
-            celular: {
-                type: Sequelize.STRING,
+            desconto: {
+                type: Sequelize.DECIMAL,
             },
-            dataCadastro: {
-                type: Sequelize.STRING,
+            valor_desconto: {
+                type: Sequelize.DECIMAL,
             },
-            status: {
+            faturado: {
                 type: Sequelize.INTEGER,
             },
-            tipoCobranca: {
+            clientes_id: {
+                type: Sequelize.INTEGER,
+            },
+            lancamentos_id: {
+                type: Sequelize.INTEGER,
+            },
+            lancamentos_descricao: {
                 type: Sequelize.STRING,
             },
-            dataCobranca: {
-                type: Sequelize.STRING,
-            },
-            userIptv: {
-                type: Sequelize.STRING,
+            pago: {
+                type: Sequelize.INTEGER,
             },
         },
         {
@@ -43,5 +42,5 @@ module.exports = (sequelize, Sequelize) => {
             updatedAt: false,
         }
     )
-    return Cliente
+    return Vendas
 }
