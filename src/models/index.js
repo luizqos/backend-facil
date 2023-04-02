@@ -19,8 +19,8 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.clientes = require('./cliente.model.js')(sequelize, Sequelize)
-db.produtos = require('./produto.model.js')(sequelize, Sequelize)
+db.clientes = require('./clientes.model.js')(sequelize, Sequelize)
+db.produtos = require('./produtos.model.js')(sequelize, Sequelize)
 db.vendas = require('./vendas.model.js')(sequelize, Sequelize)
 db.lancamentos = require('./lancamentos.model.js')(sequelize, Sequelize)
 

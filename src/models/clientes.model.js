@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Cliente = sequelize.define(
+    const Clientes = sequelize.define(
         'clientes',
         {
             idClientes: {
@@ -43,5 +43,5 @@ module.exports = (sequelize, Sequelize) => {
             updatedAt: false,
         }
     )
-    return Cliente
+    return Clientes
 }

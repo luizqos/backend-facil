@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Produto = sequelize.define(
+    const Produtos = sequelize.define(
         'produtos',
         {
             idProdutos: {
@@ -30,5 +30,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     )
 
-    return Produto
+    return Produtos
 }

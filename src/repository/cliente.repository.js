@@ -1,14 +1,14 @@
 const db = require('../models')
-const Cliente = db.clientes
-const Vendas = db.vendas
-const Lancamentos = db.lancamentos
+const clientes = db.clientes
+const vendas = db.vendas
+const lancamentos = db.lancamentos
 const Op = db.Sequelize.Op
 
 class ClientesRepository {
     async buscaTodosClientes(title) {
         let condition = title ? { title: { [Op.like]: `%${title}%` } } : null
         try {
-            return await Cliente.findAll({ where: condition })
+            return await clientes.findAll({ where: condition })
         } catch (error) {
             throw new Error(error)
         }
@@ -16,11 +16,11 @@ class ClientesRepository {
 
     async buscaClientePorId(dadosWhere) {
         try {
-            return await Cliente.findOne({
+            return await clientes.findOne({
                 where: dadosWhere,
                 include: [
                     {
-                        model: Vendas,
+                        model: vendas,
                         required: true,
                         order: [['dataVenda', 'DESC']],
                         limit: 50,
@@ -29,7 +29,7 @@ class ClientesRepository {
                         },
                         include: [
                             {
-                                model: Lancamentos,
+                                model: lancamentos,
                                 required: true,
                                 attributes: {
                                     exclude: ['vendas_id'],
