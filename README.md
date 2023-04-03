@@ -2,12 +2,12 @@
 
 #Configure o arquivo .env de acordo como o modelo.
 
-#DATABASE = database_prd
+DATABASE = database_prd
 
-#USER = root
+USER = root
 
-#PASSWORD = root
+PASSWORD = root
 
-#HOST = localhost
+HOST = localhost
 
 # Instale as dependencias com Yarn ou NPM
