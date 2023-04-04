@@ -2,7 +2,6 @@ const moment = require('moment')
 const clienteRepository = require('../repository/cliente.repository')
 const vendaRepository = require('../repository/venda.repository')
 const lancamentoRepository = require('../repository/lancamento.repository')
-const produtoRepository = require('../repository/produto.repository')
 
 class VendasController {
     async criaVendaPorId(req, res) {
@@ -68,22 +67,11 @@ class VendasController {
             const lancamentoId = idLancamentos + 1
 
             let arrayProdutosCliente = cliente.produtos_clientes
-            let produtosCliente = arrayProdutosCliente.map(function (element) {
-                return element.produtos_id
+            let valorTotal = 0
+            arrayProdutosCliente.map(function (element) {
+                valorTotal += parseFloat(element.produto.precoVenda)
+                return parseFloat(valorTotal)
             })
-
-            const whereProduto = { idProdutos: produtosCliente }
-            const produtosAssociado =
-                await produtoRepository.buscaProdutosPorId(whereProduto)
-
-            let arrayprodutosAssociado = produtosAssociado
-            let somaPreco = 0
-            arrayprodutosAssociado.map(function (element) {
-                somaPreco += parseFloat(element.precoVenda)
-                return parseFloat(somaPreco)
-            })
-            const valorTotal = somaPreco
-
             const dataUltimoPagamento = ultimaVenda.lancamento.data_pagamento
             const dataProximoVencimento = moment(dataUltimoPagamento)
                 .add(1, 'M')
