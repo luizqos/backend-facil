@@ -29,6 +29,9 @@ module.exports = (sequelize, Sequelize) => {
             lancamentos_id: {
                 type: Sequelize.INTEGER,
             },
+            usuarios_id: {
+                type: Sequelize.INTEGER,
+            },
             lancamentos_descricao: {
                 type: Sequelize.STRING,
             },

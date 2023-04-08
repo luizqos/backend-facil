@@ -17,6 +17,9 @@ module.exports = (sequelize, Sequelize) => {
             forma_pgto: {
                 type: Sequelize.STRING,
             },
+            cliente_fornecedor: {
+                type: Sequelize.STRING,
+            },
             valor: {
                 type: Sequelize.DECIMAL,
             },
@@ -30,6 +33,18 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.INTEGER,
             },
             vendas_id: {
+                type: Sequelize.INTEGER,
+            },
+            descricao: {
+                type: Sequelize.STRING,
+            },
+            tipo: {
+                type: Sequelize.STRING,
+            },
+            clientes_id: {
+                type: Sequelize.INTEGER,
+            },
+            usuarios_id: {
                 type: Sequelize.INTEGER,
             },
         },

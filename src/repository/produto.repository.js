@@ -11,5 +11,16 @@ class ProdutosRepository {
             throw new Error(error)
         }
     }
+
+    async buscaProdutosPorId(whereProduto) {
+        try {
+            return await produtos.findAll({
+                where: whereProduto,
+                attributes: ['idProdutos', 'precoVenda'],
+            })
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
 }
 module.exports = new ProdutosRepository()

@@ -22,11 +22,13 @@ db.sequelize = sequelize
 db.clientes = require('./clientes.model.js')(sequelize, Sequelize)
 db.produtos = require('./produtos.model.js')(sequelize, Sequelize)
 db.vendas = require('./vendas.model.js')(sequelize, Sequelize)
+db.produtos = require('./produtos.model.js')(sequelize, Sequelize)
 db.lancamentos = require('./lancamentos.model.js')(sequelize, Sequelize)
 db.produtosClientes = require('./produtos_clientes.model.js')(
     sequelize,
     Sequelize
 )
+db.itensDeVendas = require('./itens_de_vendas.model.js')(sequelize, Sequelize)
 
 db.clientes.hasMany(db.vendas, {
     foreignKey: 'clientes_id',
@@ -41,6 +43,11 @@ db.vendas.hasOne(db.lancamentos, {
 db.clientes.hasMany(db.produtosClientes, {
     foreignKey: 'clientes_id',
     targetKey: 'produtos_clientes',
+})
+
+db.produtosClientes.hasOne(db.produtos, {
+    foreignKey: 'idProdutos',
+    sourceKey: 'produtos_id',
 })
 
 module.exports = db
