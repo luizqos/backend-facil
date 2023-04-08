@@ -2,12 +2,9 @@ const db = require('../models')
 const lancamentos = db.lancamentos
 
 class LancamentosRepository {
-    async buscaUltimoIdLancamento() {
+    async criaLancamento(dadosParaCriarLancamento) {
         try {
-            return await lancamentos.findOne({
-                raw: true,
-                order: [['idLancamentos', 'DESC']],
-            })
+            return await lancamentos.bulkCreate([dadosParaCriarLancamento])
         } catch (error) {
             throw new Error(error)
         }

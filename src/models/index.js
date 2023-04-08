@@ -28,6 +28,7 @@ db.produtosClientes = require('./produtos_clientes.model.js')(
     sequelize,
     Sequelize
 )
+db.itensDeVendas = require('./itens_de_vendas.model.js')(sequelize, Sequelize)
 
 db.clientes.hasMany(db.vendas, {
     foreignKey: 'clientes_id',

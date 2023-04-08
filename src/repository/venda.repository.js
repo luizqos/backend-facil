@@ -2,11 +2,17 @@ const db = require('../models')
 const vendas = db.vendas
 
 class VendasRepository {
-    async buscaUltimoIdVenda() {
+    async criaVenda(dadosParaCriarVenda) {
         try {
-            return await vendas.findOne({
-                raw: true,
-                order: [['idVendas', 'DESC']],
+            return await vendas.bulkCreate([dadosParaCriarVenda])
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+    async atualizaVenda(dadosParaFaturar, idVenda) {
+        try {
+            return await vendas.update(dadosParaFaturar, {
+                where: { idVendas: idVenda },
             })
         } catch (error) {
             throw new Error(error)
