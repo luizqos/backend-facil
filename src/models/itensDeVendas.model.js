@@ -1,33 +1,34 @@
 const { Model, DataTypes } = require('sequelize')
 
-class Produtos extends Model {
+class ItensDeVendas extends Model {
     static init(sequelize) {
         super.init(
             {
-                idProdutos: {
+                idItens: {
                     type: DataTypes.INTEGER,
                     autoIncrement: true,
                     allowNull: false,
                     primaryKey: true,
                 },
-                descricao: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
+                subTotal: {
+                    type: DataTypes.DECIMAL,
                 },
-                unidade: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
+                quantidade: {
+                    type: DataTypes.INTEGER,
                 },
-                precoCompra: {
-                    type: DataTypes.STRING,
+                preco: {
+                    type: DataTypes.DECIMAL,
                 },
-                precoVenda: {
-                    type: DataTypes.STRING,
+                vendas_id: {
+                    type: DataTypes.INTEGER,
+                },
+                produtos_id: {
+                    type: DataTypes.INTEGER,
                 },
             },
             {
                 sequelize,
-                tableName: 'produtos',
+                tableName: 'itens_de_vendas',
                 timestamps: false,
                 createdAt: false,
                 updatedAt: false,
@@ -36,4 +37,4 @@ class Produtos extends Model {
     }
 }
 
-module.exports = Produtos
+module.exports = ItensDeVendas

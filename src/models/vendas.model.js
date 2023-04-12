@@ -1,49 +1,63 @@
-module.exports = (sequelize, Sequelize) => {
-    const Vendas = sequelize.define(
-        'vendas',
-        {
-            idVendas: {
-                type: Sequelize.INTEGER,
-                autoIncrement: true,
-                allowNull: false,
-                primaryKey: true,
+const { Model, DataTypes } = require('sequelize')
+
+class Vendas extends Model {
+    static init(sequelize) {
+        super.init(
+            {
+                idVendas: {
+                    type: DataTypes.INTEGER,
+                    autoIncrement: true,
+                    allowNull: false,
+                    primaryKey: true,
+                },
+                dataVenda: {
+                    type: DataTypes.STRING,
+                },
+                valorTotal: {
+                    type: DataTypes.DECIMAL,
+                },
+                desconto: {
+                    type: DataTypes.DECIMAL,
+                },
+                valor_desconto: {
+                    type: DataTypes.DECIMAL,
+                },
+                faturado: {
+                    type: DataTypes.INTEGER,
+                },
+                clientes_id: {
+                    type: DataTypes.INTEGER,
+                },
+                lancamentos_id: {
+                    type: DataTypes.INTEGER,
+                },
+                usuarios_id: {
+                    type: DataTypes.INTEGER,
+                },
+                lancamentos_descricao: {
+                    type: DataTypes.STRING,
+                },
+                pago: {
+                    type: DataTypes.INTEGER,
+                },
             },
-            dataVenda: {
-                type: Sequelize.STRING,
-            },
-            valorTotal: {
-                type: Sequelize.DECIMAL,
-            },
-            desconto: {
-                type: Sequelize.DECIMAL,
-            },
-            valor_desconto: {
-                type: Sequelize.DECIMAL,
-            },
-            faturado: {
-                type: Sequelize.INTEGER,
-            },
-            clientes_id: {
-                type: Sequelize.INTEGER,
-            },
-            lancamentos_id: {
-                type: Sequelize.INTEGER,
-            },
-            usuarios_id: {
-                type: Sequelize.INTEGER,
-            },
-            lancamentos_descricao: {
-                type: Sequelize.STRING,
-            },
-            pago: {
-                type: Sequelize.INTEGER,
-            },
-        },
-        {
-            timestamps: false,
-            createdAt: false,
-            updatedAt: false,
-        }
-    )
-    return Vendas
+            {
+                sequelize,
+                tableName: 'vendas',
+                timestamps: false,
+                createdAt: false,
+                updatedAt: false,
+            }
+        )
+    }
+
+    static associate(models) {
+        this.hasOne(models.Lancamentos, {
+            foreignKey: 'vendas_id',
+            targetKey: 'lancamentos',
+            as: 'lancamentos',
+        })
+    }
 }
+
+module.exports = Vendas

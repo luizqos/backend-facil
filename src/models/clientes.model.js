@@ -1,47 +1,66 @@
-module.exports = (sequelize, Sequelize) => {
-    const Clientes = sequelize.define(
-        'clientes',
-        {
-            idClientes: {
-                type: Sequelize.INTEGER,
-                autoIncrement: true,
-                allowNull: false,
-                primaryKey: true,
+const { Model, DataTypes } = require('sequelize')
+
+class Clientes extends Model {
+    static init(sequelize) {
+        super.init(
+            {
+                idClientes: {
+                    type: DataTypes.INTEGER,
+                    autoIncrement: true,
+                    allowNull: false,
+                    primaryKey: true,
+                },
+                nomeCliente: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                },
+                email: {
+                    type: DataTypes.STRING,
+                },
+                telefone: {
+                    type: DataTypes.STRING,
+                },
+                celular: {
+                    type: DataTypes.STRING,
+                },
+                dataCadastro: {
+                    type: DataTypes.STRING,
+                },
+                status: {
+                    type: DataTypes.INTEGER,
+                },
+                tipoCobranca: {
+                    type: DataTypes.STRING,
+                },
+                dataCobranca: {
+                    type: DataTypes.STRING,
+                },
+                userIptv: {
+                    type: DataTypes.STRING,
+                },
             },
-            nomeCliente: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            email: {
-                type: Sequelize.STRING,
-            },
-            telefone: {
-                type: Sequelize.STRING,
-            },
-            celular: {
-                type: Sequelize.STRING,
-            },
-            dataCadastro: {
-                type: Sequelize.STRING,
-            },
-            status: {
-                type: Sequelize.INTEGER,
-            },
-            tipoCobranca: {
-                type: Sequelize.STRING,
-            },
-            dataCobranca: {
-                type: Sequelize.STRING,
-            },
-            userIptv: {
-                type: Sequelize.STRING,
-            },
-        },
-        {
-            timestamps: false,
-            createdAt: false,
-            updatedAt: false,
-        }
-    )
-    return Clientes
+            {
+                sequelize,
+                tableName: 'clientes',
+                timestamps: false,
+                createdAt: false,
+                updatedAt: false,
+            }
+        )
+    }
+
+    static associate(models) {
+        this.hasMany(models.Vendas, {
+            foreignKey: 'clientes_id',
+            targetKey: 'vendas',
+            as: 'vendas',
+        })
+        this.hasMany(models.ProdutosClientes, {
+            foreignKey: 'clientes_id',
+            targetKey: 'produtos_clientes',
+            as: 'produtos_clientes',
+        })
+    }
 }
+
+module.exports = Clientes

@@ -1,58 +1,64 @@
-module.exports = (sequelize, Sequelize) => {
-    const Lancamentos = sequelize.define(
-        'lancamentos',
-        {
-            idLancamentos: {
-                type: Sequelize.INTEGER,
-                autoIncrement: true,
-                allowNull: false,
-                primaryKey: true,
+const { Model, DataTypes } = require('sequelize')
+
+class Lancamentos extends Model {
+    static init(sequelize) {
+        super.init(
+            {
+                idLancamentos: {
+                    type: DataTypes.INTEGER,
+                    autoIncrement: true,
+                    allowNull: false,
+                    primaryKey: true,
+                },
+                data_vencimento: {
+                    type: DataTypes.STRING,
+                },
+                data_pagamento: {
+                    type: DataTypes.STRING,
+                },
+                forma_pgto: {
+                    type: DataTypes.STRING,
+                },
+                cliente_fornecedor: {
+                    type: DataTypes.STRING,
+                },
+                valor: {
+                    type: DataTypes.DECIMAL,
+                },
+                desconto: {
+                    type: DataTypes.DECIMAL,
+                },
+                valor_desconto: {
+                    type: DataTypes.DECIMAL,
+                },
+                baixado: {
+                    type: DataTypes.INTEGER,
+                },
+                vendas_id: {
+                    type: DataTypes.INTEGER,
+                },
+                descricao: {
+                    type: DataTypes.STRING,
+                },
+                tipo: {
+                    type: DataTypes.STRING,
+                },
+                clientes_id: {
+                    type: DataTypes.INTEGER,
+                },
+                usuarios_id: {
+                    type: DataTypes.INTEGER,
+                },
             },
-            data_vencimento: {
-                type: Sequelize.STRING,
-            },
-            data_pagamento: {
-                type: Sequelize.STRING,
-            },
-            forma_pgto: {
-                type: Sequelize.STRING,
-            },
-            cliente_fornecedor: {
-                type: Sequelize.STRING,
-            },
-            valor: {
-                type: Sequelize.DECIMAL,
-            },
-            desconto: {
-                type: Sequelize.DECIMAL,
-            },
-            valor_desconto: {
-                type: Sequelize.DECIMAL,
-            },
-            baixado: {
-                type: Sequelize.INTEGER,
-            },
-            vendas_id: {
-                type: Sequelize.INTEGER,
-            },
-            descricao: {
-                type: Sequelize.STRING,
-            },
-            tipo: {
-                type: Sequelize.STRING,
-            },
-            clientes_id: {
-                type: Sequelize.INTEGER,
-            },
-            usuarios_id: {
-                type: Sequelize.INTEGER,
-            },
-        },
-        {
-            timestamps: false,
-            createdAt: false,
-            updatedAt: false,
-        }
-    )
-    return Lancamentos
+            {
+                sequelize,
+                tableName: 'lancamentos',
+                timestamps: false,
+                createdAt: false,
+                updatedAt: false,
+            }
+        )
+    }
 }
+
+module.exports = Lancamentos
