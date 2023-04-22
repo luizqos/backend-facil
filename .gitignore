@@ -1,24 +1,9 @@
 node_modules/
-package-lock.json
 
 *.log
-coverage
-
 
 README.md
-apidoc.json
 
 .env
 .env.production
 .env.development
-
-env.production
-env.development
-
-*.bak
-
-.vscode/*
-.idea
-yarn.lock
-
-.husky/
