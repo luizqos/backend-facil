@@ -2,6 +2,8 @@
 require('dotenv').config()
 const puppeteer = require('puppeteer')
 const logger = require('../utils/loggerRenovacao')
+const clientesRepository = require('../repositories/clientes.repository')
+
 async function aguarde(time) {
     return new Promise(function (resolve) {
         setTimeout(resolve, time * 1000)
@@ -10,10 +12,20 @@ async function aguarde(time) {
 
 class RenovacaoController {
     async renovaAssinaturaCliente(req, res) {
-        const { cliente } = req.params
-
-        const separador = '-'.repeat(100)
         try {
+            const separador = '-'.repeat(100)
+            const { cliente } = req.params
+            const dadosWhere = { userIptv: cliente }
+            const buscaCliente = await clientesRepository.buscaClientePorLogin(
+                dadosWhere
+            )
+            if (!buscaCliente) {
+                logger.info(separador)
+                logger.info(`O ${cliente} não faz parte da sua lista`)
+                return res
+                    .status(404)
+                    .send({ message: `Cliente ${cliente} não encontrado` })
+            }
             logger.info(separador)
             const browser = await puppeteer.launch({
                 headless: true, //Altere para true para ocultar navegador na execução
