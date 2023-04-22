@@ -8,15 +8,15 @@ const logger = require('../utils/logger')
 class VendasController {
     async criaVendaPorId(req, res) {
         try {
-            const { idCliente } = req.query
-            const filtrosBuscaCliente = { idClientes: idCliente }
+            const { id } = req.query
+            const filtrosBuscaCliente = { idClientes: id }
 
             const cliente = await clientesRepository.buscaClientePorId(
                 filtrosBuscaCliente
             )
             if (!cliente.status) {
                 logger.info(
-                    `Cliente ${idCliente} - ${cliente.nomeCliente} Inativo ou inexistente, Não pode ser atribuida venda ao cliente.`
+                    `Cliente ${id} - ${cliente.nomeCliente} Inativo ou inexistente, Não pode ser atribuida venda ao cliente.`
                 )
                 return res.status(204).send()
             }
@@ -26,7 +26,7 @@ class VendasController {
 
             if (!ultimaVenda.pago) {
                 logger.info(
-                    `Ultima parcela em aberto, Não pode ser atribuida venda ao cliente ${idCliente} - ${cliente.nomeCliente}.`
+                    `Ultima parcela em aberto, Não pode ser atribuida venda ao cliente ${id} - ${cliente.nomeCliente}.`
                 )
                 return res.status(204).send()
             }
@@ -37,7 +37,7 @@ class VendasController {
 
             if (diferencaDias > 31 && ultimaVenda.pago) {
                 logger.info(
-                    `Cliente ${idCliente} - ${cliente.nomeCliente} desistiu, Não pode ser atribuida venda ao cliente.`
+                    `Cliente ${id} - ${cliente.nomeCliente} desistiu, Não pode ser atribuida venda ao cliente.`
                 )
                 return res.status(204).send()
             }
@@ -52,14 +52,14 @@ class VendasController {
                 cliente.tipoCobranca.toUpperCase() === 'M'
             ) {
                 logger.info(
-                    `Ja existe venda para cliente ${idCliente} - ${cliente.nomeCliente} neste mês, Não pode ser atribuida venda ao cliente.`
+                    `Ja existe venda para cliente ${id} - ${cliente.nomeCliente} neste mês, Não pode ser atribuida venda ao cliente.`
                 )
                 return res.status(204).send()
             }
 
             if (cliente.tipoCobranca.toUpperCase() === 'B') {
                 logger.info(
-                    `Cliente bimestral, Não pode ser atribuida venda ao cliente ${idCliente} - ${cliente.nomeCliente}.`
+                    `Cliente bimestral, Não pode ser atribuida venda ao cliente ${id} - ${cliente.nomeCliente}.`
                 )
                 return res.status(204).send()
             }
@@ -80,7 +80,7 @@ class VendasController {
                 dataVenda: moment().format('YYYY-MM-DD'),
                 valorTotal: valorTotal.toFixed(2),
                 faturado: 0,
-                clientes_id: parseInt(idCliente),
+                clientes_id: parseInt(id),
                 usuarios_id: 1,
                 pago: 0,
             }
@@ -112,7 +112,7 @@ class VendasController {
                 cliente_fornecedor: cliente.nomeCliente,
                 forma_pgto: 'Pix',
                 tipo: 'receita',
-                clientes_id: parseInt(idCliente),
+                clientes_id: parseInt(id),
                 vendas_id: idVenda,
                 usuarios_id: 1,
             }
