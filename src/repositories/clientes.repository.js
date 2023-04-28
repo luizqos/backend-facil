@@ -15,7 +15,7 @@ class ClientesRepository {
         }
     }
 
-    async buscaClientePorLogin(dadosWhere) {
+    async buscaCliente(dadosWhere) {
         try {
             return await clientes.findOne({ where: dadosWhere })
         } catch (error) {

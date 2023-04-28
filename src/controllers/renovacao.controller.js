@@ -1,22 +1,18 @@
 /* eslint-disable no-undef */
-require('dotenv').config()
 const puppeteer = require('puppeteer')
 const logger = require('../utils/loggerRenovacao')
 const clientesRepository = require('../repositories/clientes.repository')
 
-async function aguarde(time) {
-    return new Promise(function (resolve) {
-        setTimeout(resolve, time * 1000)
-    })
+async function aguarde(segundos) {
+    return new Promise((resolve) => setTimeout(resolve, segundos * 1000))
 }
-
 class RenovacaoController {
     async renovaAssinaturaCliente(req, res) {
         try {
             const separador = '-'.repeat(100)
             const { cliente } = req.params
             const dadosWhere = { userIptv: cliente }
-            const buscaCliente = await clientesRepository.buscaClientePorLogin(
+            const buscaCliente = await clientesRepository.buscaCliente(
                 dadosWhere
             )
             if (!buscaCliente) {
