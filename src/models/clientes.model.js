@@ -38,6 +38,9 @@ class Clientes extends Model {
                 userIptv: {
                     type: DataTypes.STRING,
                 },
+                idIptv: {
+                    type: DataTypes.STRING,
+                },
             },
             {
                 sequelize,
