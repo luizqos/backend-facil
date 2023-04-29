@@ -25,7 +25,13 @@ class ClientesController {
                     .send({ message: `Cliente ${cliente} não encontrado` })
             }
             const browser = await puppeteer.launch({
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                    '--disable-dev-shm-usage',
+                ],
                 headless: true, //Altere para true para ocultar navegador na execução
+                executablePath: '/var/snap/chromium',
             })
             const page = await browser.newPage()
 
