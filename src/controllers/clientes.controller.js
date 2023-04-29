@@ -25,7 +25,7 @@ class ClientesController {
                     .send({ message: `Cliente ${cliente} não encontrado` })
             }
             const browser = await puppeteer.launch({
-                headless: false, //Altere para true para ocultar navegador na execução
+                headless: true, //Altere para true para ocultar navegador na execução
             })
             const page = await browser.newPage()
 
