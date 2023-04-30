@@ -31,7 +31,7 @@ class ClientesController {
                     '--disable-dev-shm-usage',
                 ],
                 headless: true, //Altere para true para ocultar navegador na execução
-                executablePath: '/var/snap/chromium',
+                executablePath: '/usr/bin/chromium-browser',
             })
             const page = await browser.newPage()
 
