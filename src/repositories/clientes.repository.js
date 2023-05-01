@@ -15,6 +15,14 @@ class ClientesRepository {
         }
     }
 
+    async buscaCliente(dadosWhere) {
+        try {
+            return await clientes.findOne({ where: dadosWhere })
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+
     async buscaClientePorId(filtrosWhere) {
         try {
             return await clientes.findOne({
