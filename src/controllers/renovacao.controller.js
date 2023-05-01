@@ -90,17 +90,20 @@ class RenovacaoController {
             const rota = 'clients'
             const parametros = '?renew_client_plus&client_id='
             const meses = 1
-
+            const separador = '-'.repeat(100)
             const { cliente } = req.params
             const dadosWhere = { userIptv: cliente }
             const buscaCliente = await clientesRepository.buscaCliente(
                 dadosWhere
             )
             if (!buscaCliente) {
+                logger.info(separador)
+                logger.info(`O ${cliente} não faz parte da sua lista`)
                 return res
                     .status(404)
                     .send({ message: `Cliente ${cliente} não encontrado` })
             }
+            logger.info(separador)
             const { idIptv } = buscaCliente
             // Log in and perform POST request
             const login = await fetch(`${process.env.URL}/login/`, {
@@ -116,6 +119,8 @@ class RenovacaoController {
             })
 
             if (!login.ok) {
+                logger.info(separador)
+                logger.info(`Não foi possivel logar no sistema.`)
                 throw new Error('Ocorreu um erro ao fazer o Login.')
             }
             // Store cookie in local storage
@@ -135,11 +140,14 @@ class RenovacaoController {
             )
 
             if (!response.ok) {
-                throw new Error(
-                    'Erro ao executar a ativação ou inativação do usuario'
-                )
+                logger.info(separador)
+                logger.info(`Ocorreu um erro ao renovor o cliente: ${cliente}`)
+                throw new Error('Ocorreu um erro ao renovar o cliente')
             }
             const result = JSON.parse(await response.text())
+            logger.info(
+                `Assinatura renovada para o Cliente: ${cliente}, status ${result}`
+            )
             return res.status(200).send(result)
         } catch (error) {
             console.error(error)
