@@ -105,7 +105,7 @@ class VendasController {
                 descricao: `Lista IPTV - Ref: ${mesAtual} Nº:${idVenda}`,
                 valor: valorTotal.toFixed(2),
                 data_vencimento: dataProximoVencimento,
-                data_pagamento: '0000-00-00',
+                data_pagamento: null,
                 desconto: '0.00',
                 valor_desconto: '0.00',
                 baixado: 0,
