@@ -1,9 +1,16 @@
 const produtosRepository = require('../repositories/produtos.repository')
+const { Op } = require('sequelize')
 
 class ProdutosController {
-    async buscaTodosProdutos(req, res) {
-        const { title } = req.query
-        const produtos = await produtosRepository.buscaTodosProdutos(title)
+    async buscaProdutos(req, res) {
+        const { api } = req.query
+        let filtrosWhere = { api: api }
+        if (!api) {
+            filtrosWhere = { idProdutos: { [Op.gt]: 0 } }
+        }
+        const produtos = await produtosRepository.buscaProdutosDinamicamente(
+            filtrosWhere
+        )
         return res.send(produtos)
     }
 }
