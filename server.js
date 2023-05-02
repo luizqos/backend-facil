@@ -14,11 +14,6 @@ const corsOptions = {
     origin: 'http://localhost:8081',
 }
 
-const credentials = {
-    key: fs.readFileSync(process.env.SSL_PRIVATE_KEY),
-    cert: fs.readFileSync(process.env.SSL_CERTIFICATE),
-}
-
 database
     .sync()
     .then(() => console.log('Banco Sincronizado'))
@@ -34,6 +29,10 @@ if (process.env.RUNNING === 'LOCAL') {
         console.log(`Servidor está sendo executado na porta ${port}.`)
     )
 } else {
+    const credentials = {
+        key: fs.readFileSync(process.env.SSL_PRIVATE_KEY),
+        cert: fs.readFileSync(process.env.SSL_CERTIFICATE),
+    }
     const server = https.createServer(credentials, app)
     server.listen(port, () =>
         console.log(`Servidor está sendo executado na porta ${port}.`)
