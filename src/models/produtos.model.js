@@ -24,6 +24,9 @@ class Produtos extends Model {
                 precoVenda: {
                     type: DataTypes.STRING,
                 },
+                api: {
+                    type: DataTypes.INTEGER,
+                },
             },
             {
                 sequelize,
